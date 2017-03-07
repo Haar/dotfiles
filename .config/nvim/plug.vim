@@ -31,7 +31,8 @@ Plug 'ervandew/supertab'
 
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
-    !./install.sh
+    " Install YCM with tern completer for Javascript
+    !./install.sh --tern-completer
   endif
 endfunction
 

@@ -1,7 +1,12 @@
 "
 " Neovim(/Vim?) configuration
 " Author: Robert White
-" TODO: Clean up init.vim
+" TODO: Clean up init.vim/Document plug.vim
+" Note: An initial setup takes a long while as YouCompleteMe has several
+" large dependencies; setting up from fresh last took 243 seconds.
+" Currently YouCompleteMe is set to install the tern-completer for Javascript,
+" I recommend you update the settings in plug.vim with the completers you
+" require.
 
 " Shell stuffs
 set shell=/bin/bash
