@@ -8,21 +8,20 @@
 " I recommend you update the settings in plug.vim with the completers you
 " require.
 
-" Shell stuffs
-set shell=/bin/bash
-
-" Basics
+" Shell stuffs {{{
+  set shell=/bin/bash
+" }}}
+" Basics {{{
 syntax enable
 filetype off
-set background=light
-
-" Powerline
+" }}}
+" Powerline configuration {{{
 set laststatus=2
 set encoding=utf-8
-set fillchars+=stl:\ ,stlnc:\
+" set fillchars+=stl:\ ,stlnc:\
 set termencoding=utf-8
-
-" Indentation handling
+" }}}
+" Indentation handling {{{
 set cindent
 set smartindent
 set autoindent
@@ -31,8 +30,10 @@ set expandtab
 set shiftwidth=2
 set smarttab
 set softtabstop=4
-
-" Generic Layout Restraints
+set splitbelow
+set splitright
+" }}}
+" Generic Layout Restraints {{{
 set number
 set ai
 set guioptions-=m
@@ -41,32 +42,35 @@ set guioptions-=r
 set ruler
 set hidden
 set eol
-
-" Because lots of temporary files annoy me
+" }}}
+" Backup and Swapfile configuration {{{
 set nobackup
 set nowritebackup
 set noswapfile
 " Due to my tendency of saving/closing files mid-edit, the much needed:
 set undofile
 set undodir=~/.vim_undo,~/tmp
-
-" Make backspace work as expected
+" }}}
+" Make backspace work as expected {{{
 set backspace=indent,eol,start
-
-" Needs moar search
+" }}}
+" Search configuration {{{
 set hlsearch
 set incsearch
+nnoremap t :nohlsearch<cr>
 
-" Share the MacOS clipboard
+" set showmatch " Highlight matching braces
+" }}}
+" Share the MacOS clipboard {{{
 set clipboard=unnamed
-
-" Test fancy Powerline
+" }}}
+" Powerline configuration {{{
 let g:airline_powerline_fonts = 1
-
-" 'Acking about in Vim
+" }}}
+" Ack.vim configuration {{{
 let g:ackprg="ack -H --nocolor --nogroup --column"
-
-" Keeping things clean.
+" }}}
+" Custom commands {{{
 function! <SID>StripTrailingWhitespaces()
   let l = line(".")
   let c = col(".")
@@ -75,14 +79,17 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 " Note - Never WRITE on Memory
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-
-" Because I have big hands and my left thumb never seems to leave spacebar
+" }}}
+" Leader commands {{{
+  " Because I have big hands and my left thumb never seems to leave spacebar
 let mapleader=" "
 map <leader><leader> <c-^>
 map <leader>e :edit <C-R>=expand("%:h")<cr>/
 map <leader>v :view <C-R>=expand("%:h")<cr>/
 map <leader>t :CtrlP<cr>
-
+" Try FZF instead of Ctrl-P
+map <leader>t :FZF<cr>
+" }}}
 " Vim-Ruby Magix - Oh noes!
 function! RubyEndToken ()
   let current_line = getline( '.' )
@@ -111,15 +118,18 @@ function! UseRubyIndent ()
 endfunction
 autocmd FileType ruby,eruby call UseRubyIndent()
 
+" Autoload Vim plugins {{{
 source ~/.config/nvim/plug.vim
-
-set background=light
+" }}}
+" Set theme (dependent on plugins loaded) {{{
+let g:impact_transbg=1
 colorscheme solarized
-
+set background=light
+" }}}
 " Configure Alchemist.vim to point at Homebrew elixir installation
-"
 let g:alchemist#elixir_erlang_src = "/usr/local/Cellar"
 
+" Tab completion overrides and configuration {{{
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<tab>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<s-tab>', '<Up>']
@@ -140,31 +150,55 @@ function ExpandSnippetOrCarriageReturn()
     endif
 endfunction
 inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
-
+" }}}
 " Tabularize! =]
 map <leader>a :Tabularize /
 set fdm=syntax
 noremap L zo
 noremap H zc
 set fdl=1
-nnoremap t :nohlsearch<cr>
+
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+
+function! s:align()
+  let p = '^\s*|\s.*\s|\s*$'
+  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+    Tabularize/|/l1
+    normal! 0
+    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
+endfunction
+
+" Syntax extensions
 
 au BufRead,BufNewFile *.css set ft=css syntax=css3
 au BufRead,BufNewFile *.md set ft=markdown syntax=markdown
 
-" Ignore basics when using Ctrl-P searching
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+" Ctrl-P speed-up/configuration
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|_build' " Ignore basics when using Ctrl-P searching
 let g:ctrlp_use_caching = 0 " Experimental to see how it works for frequency
+" Use 'The Silver Searcher' if available
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 
 highlight clear SignColumn
 
-" Enable neomake linting for flow JS
+" Automatically run linting on file save
 if has('autocmd')
   autocmd! BufWritePost * Neomake
 endif
 
 """ open list without moving the cursor; use :ll to jump to current error
 let g:neomake_open_list = 2
+nnoremap <leader>ne :ll<CR>
 """ verbose behaviour
 let g:neomake_verbose=3
 """ error log file
@@ -177,5 +211,39 @@ let g:neomake_autolint_sign_column_always = 1
 let g:neomake_open_list = 0
 let g:jsx_ext_required = 0
 
-""" jump to next error
-nnoremap <leader>ne :ll<CR>
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight default fzf1 ctermfg=161 ctermbg=238 guifg=#E12672 guibg=#565656
+  highlight default fzf2 ctermfg=151 ctermbg=238 guifg=#BCDDBD guibg=#565656
+  highlight default fzf3 ctermfg=252 ctermbg=238 guifg=#D9D9D9 guibg=#565656
+  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+endfunction
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
+" let g:fzf_layout = { 'window': 'enew' }
+" let g:fzf_nvim_statusline = 0
+let g:airline_skip_empty_sections = 1
+let g:airline_extensions = ['branch', 'tabline']
+
+set termguicolors
+
+" vim:foldmethod=marker:foldlevel=0
+
+set guicursor+=a:blinkon0

@@ -16,7 +16,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
 Plug 'godlygeek/tabular'
-Plug 'altercation/vim-colors-solarized'
+Plug 'frankier/neovim-colors-solarized-truecolor-only'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'othree/html5.vim'
 Plug 'ack.vim'
@@ -49,10 +49,14 @@ Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating'
 Plug 'mattn/calendar-vim'
 Plug 'mxw/vim-jsx'
-if has('nvim')
-  Plug 'benekastah/neomake', has('nvim') ? {} : { 'on': [] }
-endif
+Plug 'benekastah/neomake'
 
 Plug 'derekwyatt/vim-scala'
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'colepeters/spacemacs-theme.vim'
+Plug 'joshdick/onedark.vim'
+Plug 'larrylv/ycm-elixir'
 
 call plug#end()
