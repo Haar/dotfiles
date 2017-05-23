@@ -59,4 +59,6 @@ Plug 'colepeters/spacemacs-theme.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'larrylv/ycm-elixir'
 
+Plug 'slashmili/alchemist.vim'
+
 call plug#end()

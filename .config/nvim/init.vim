@@ -90,7 +90,7 @@ map <leader>t :CtrlP<cr>
 " Try FZF instead of Ctrl-P
 map <leader>t :FZF<cr>
 " }}}
-" Vim-Ruby Magix - Oh noes!
+" Vim-Ruby hacks {{{
 function! RubyEndToken ()
   let current_line = getline( '.' )
   let braces_at_end = '{\s*\(|\(,\|\s\|\w\)*|\s*\)\?$'
@@ -117,7 +117,7 @@ function! UseRubyIndent ()
 
 endfunction
 autocmd FileType ruby,eruby call UseRubyIndent()
-
+" }}}
 " Autoload Vim plugins {{{
 source ~/.config/nvim/plug.vim
 " }}}
@@ -126,9 +126,9 @@ let g:impact_transbg=1
 colorscheme solarized
 set background=light
 " }}}
-" Configure Alchemist.vim to point at Homebrew elixir installation
-let g:alchemist#elixir_erlang_src = "/usr/local/Cellar"
-
+" Configure Alchemist.vim to point at cloned source codes for Elixir and OTP {{{
+let g:alchemist#elixir_erlang_src = "/usr/local/share/src"
+" }}}
 " Tab completion overrides and configuration {{{
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<tab>', '<Down>']
@@ -151,13 +151,9 @@ function ExpandSnippetOrCarriageReturn()
 endfunction
 inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 " }}}
-" Tabularize! =]
+" Tabularize! =] {{{
 map <leader>a :Tabularize /
-set fdm=syntax
-noremap L zo
-noremap H zc
-set fdl=1
-
+" Automatic tabularizing of tables e.g. | foo | bar |
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
 function! s:align()
@@ -170,14 +166,18 @@ function! s:align()
     call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
   endif
 endfunction
-
-" Syntax extensions
-
+" }}}
+" Fold control {{{
+set fdm=syntax
+noremap L zo
+noremap H zc
+set fdl=1
+" }}}
+" Syntax extensions {{{
 au BufRead,BufNewFile *.css set ft=css syntax=css3
 au BufRead,BufNewFile *.md set ft=markdown syntax=markdown
-
-
-" Ctrl-P speed-up/configuration
+" }}}
+" Ctrl-P speed-up/configuration {{{
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|_build' " Ignore basics when using Ctrl-P searching
 let g:ctrlp_use_caching = 0 " Experimental to see how it works for frequency
 " Use 'The Silver Searcher' if available
@@ -189,9 +189,11 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
+" }}}
+
 highlight clear SignColumn
 
-" Automatically run linting on file save
+" NeoMake {{{ Automatically run linting on file save
 if has('autocmd')
   autocmd! BufWritePost * Neomake
 endif
@@ -211,6 +213,8 @@ let g:neomake_autolint_sign_column_always = 1
 let g:neomake_open_list = 0
 let g:jsx_ext_required = 0
 
+" }}}
+" AirLine / FZF Configuration {{{
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 
@@ -242,8 +246,18 @@ autocmd! User FzfStatusLine call <SID>fzf_statusline()
 let g:airline_skip_empty_sections = 1
 let g:airline_extensions = ['branch', 'tabline']
 
+" }}}
+
 set termguicolors
+set mouse=a
 
 " vim:foldmethod=marker:foldlevel=0
+
+" Terminal Key-mappings {{{
+" Sensible escape sequence within a terminal
+if has('nvim')
+  tnoremap <Esc><Esc> <C-\><C-n>
+endif
+" }}}
 
 set guicursor+=a:blinkon0
