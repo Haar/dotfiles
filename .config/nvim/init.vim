@@ -251,8 +251,6 @@ let g:airline_extensions = ['branch', 'tabline']
 set termguicolors
 set mouse=a
 
-" vim:foldmethod=marker:foldlevel=0
-
 " Terminal Key-mappings {{{
 " Sensible escape sequence within a terminal
 if has('nvim')
@@ -261,3 +259,6 @@ endif
 " }}}
 
 set guicursor+=a:blinkon0
+
+" vim:foldmethod=marker:foldlevel=0
+
