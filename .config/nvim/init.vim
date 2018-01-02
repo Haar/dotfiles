@@ -1,5 +1,5 @@
 "
-" Neovim(/Vim?) configuration
+" Neovim(/Vim 8+) configuration
 " Author: Robert White
 " TODO: Clean up init.vim/Document plug.vim
 " Note: An initial setup takes a long while as YouCompleteMe has several
@@ -54,11 +54,11 @@ set undodir=~/.vim_undo,~/tmp
 " Make backspace work as expected {{{
 set backspace=indent,eol,start
 " }}}
+"
 " Search configuration {{{
 set hlsearch
 set incsearch
 nnoremap t :nohlsearch<cr>
-
 " set showmatch " Highlight matching braces
 " }}}
 " Share the MacOS clipboard {{{
@@ -198,6 +198,12 @@ if has('autocmd')
   autocmd! BufWritePost * Neomake
 endif
 
+let g:neomake_elixir_sky_dogma_maker = {
+    \ 'exe': 'mix',
+    \ 'args': ['lint.dogma', '%:p', '--format=flycheck'],
+    \ 'errorformat': '%E%f:%l:%c: %.: %m'
+    \ }
+
 """ open list without moving the cursor; use :ll to jump to current error
 let g:neomake_open_list = 2
 nnoremap <leader>ne :ll<CR>
@@ -207,11 +213,14 @@ let g:neomake_verbose=3
 let g:neomake_logfile=$HOME.'/.nvim/log/neomake.log'
 
 let g:neomake_autolint_cachedir='~/.nvim/cache'
+let g:neomake_elixir_enabled_makers = ['mix', 'credo', 'sky_dogma']
 let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
 let g:neomake_jsx_enabled_makers = ['eslint']
 let g:neomake_autolint_sign_column_always = 1
 let g:neomake_open_list = 0
 let g:jsx_ext_required = 0
+
+let g:neomake_markdown_enabled_makers = [] " Disable writegood for now
 
 " }}}
 " AirLine / FZF Configuration {{{
