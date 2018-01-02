@@ -84,11 +84,9 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
   " Because I have big hands and my left thumb never seems to leave spacebar
 let mapleader=" "
 map <leader><leader> <c-^>
-map <leader>e :edit <C-R>=expand("%:h")<cr>/
-map <leader>v :view <C-R>=expand("%:h")<cr>/
 map <leader>t :CtrlP<cr>
 " Try FZF instead of Ctrl-P
-map <leader>t :FZF<cr>
+" map <leader>t :FZF<cr>
 " }}}
 " Vim-Ruby hacks {{{
 function! RubyEndToken ()
@@ -181,9 +179,11 @@ au BufRead,BufNewFile *.md set ft=markdown syntax=markdown
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|_build' " Ignore basics when using Ctrl-P searching
 let g:ctrlp_use_caching = 0 " Experimental to see how it works for frequency
 " Use 'The Silver Searcher' if available
-if executable('ag')
+if executable('rg')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'

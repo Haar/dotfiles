@@ -53,8 +53,6 @@ Plug 'benekastah/neomake'
 
 Plug 'derekwyatt/vim-scala'
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'colepeters/spacemacs-theme.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'larrylv/ycm-elixir'
