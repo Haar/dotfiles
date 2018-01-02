@@ -40,23 +40,20 @@ Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'justinmk/vim-sneak'
-Plug 'mustache/vim-mustache-handlebars'
 Plug 'slashmili/alchemist.vim'
 Plug 'tpope/vim-projectionist'
 Plug 'isRuslan/vim-es6'
-Plug 'rainbow_parentheses.vim'
-Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating'
 Plug 'mattn/calendar-vim'
 Plug 'mxw/vim-jsx'
 Plug 'benekastah/neomake'
 
 Plug 'derekwyatt/vim-scala'
+Plug 'ensime/ensime-vim'
 
 Plug 'colepeters/spacemacs-theme.vim'
 Plug 'joshdick/onedark.vim'
-Plug 'larrylv/ycm-elixir'
-
 Plug 'slashmili/alchemist.vim'
+Plug 'larrylv/ycm-elixir'
 
 call plug#end()
