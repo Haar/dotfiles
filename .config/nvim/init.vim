@@ -269,5 +269,9 @@ endif
 
 set guicursor+=a:blinkon0
 
-" vim:foldmethod=marker:foldlevel=0
+highlight Search guibg='White' guifg='NONE'
+highlight Visual guibg='White' guifg='NONE'
+highlight Cursor guifg='White' guibg='NONE'
+highlight iCursor guifg='White' guibg='NONE'
 
+" vim:foldmethod=marker:foldlevel=0
