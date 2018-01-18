@@ -180,14 +180,16 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|_build' " Ignore basic
 let g:ctrlp_use_caching = 0 " Experimental to see how it works for frequency
 " Use 'The Silver Searcher' if available
 if executable('rg')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+  " Use rg over grep
   set grepprg=rg\ --color=never
   let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+" if executable('ag')
+"   " Use ag in CtrlP for listing files. Fast enough and consistent ordering.
+"   set grepprg=ag\ --nogroup\ --nocolor
+"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" endif
 
 " }}}
 
