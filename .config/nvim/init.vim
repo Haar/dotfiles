@@ -67,7 +67,8 @@ set clipboard=unnamed
 let g:airline_powerline_fonts = 1
 " }}}
 " Ack.vim configuration {{{
-let g:ackprg="ack -H --nocolor --nogroup --column"
+" let g:ackprg="ack -H --nocolor --nogroup --column"
+let g:ackprg = 'rg --vimgrep --no-heading'
 " }}}
 " Custom commands {{{
 function! <SID>StripTrailingWhitespaces()
