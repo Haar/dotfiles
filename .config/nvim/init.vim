@@ -25,11 +25,11 @@ set termencoding=utf-8
 set cindent
 set smartindent
 set autoindent
-set tabstop=4
+set tabstop=2
 set expandtab
 set shiftwidth=2
 set smarttab
-set softtabstop=4
+set softtabstop=2
 set splitbelow
 set splitright
 " }}}
@@ -54,7 +54,6 @@ set undodir=~/.vim_undo,~/tmp
 " Make backspace work as expected {{{
 set backspace=indent,eol,start
 " }}}
-"
 " Search configuration {{{
 set hlsearch
 set incsearch
