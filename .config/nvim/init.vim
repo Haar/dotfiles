@@ -172,8 +172,8 @@ noremap H zc
 set fdl=1
 " }}}
 " Syntax extensions {{{
-au BufRead,BufNewFile *.css set ft=css syntax=css3
-au BufRead,BufNewFile *.md set ft=markdown syntax=markdown
+" au BufRead,BufNewFile *.css set ft=css
+" au BufRead,BufNewFile *.md set ft=markdown
 " }}}
 " Ctrl-P speed-up/configuration {{{
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|_build' " Ignore basics when using Ctrl-P searching
@@ -191,6 +191,12 @@ endif
 "   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " endif
 
+" }}}
+" Easier split navigation {{{
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 " }}}
 
 highlight clear SignColumn
@@ -216,8 +222,8 @@ let g:neomake_logfile=$HOME.'/.nvim/log/neomake.log'
 
 let g:neomake_autolint_cachedir='~/.nvim/cache'
 let g:neomake_elixir_enabled_makers = ['mix', 'credo', 'sky_dogma']
-let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
-let g:neomake_jsx_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['eslint', 'flow', 'prettier']
+let g:neomake_jsx_enabled_makers = ['eslint', 'prettier']
 let g:neomake_autolint_sign_column_always = 1
 let g:neomake_open_list = 0
 let g:jsx_ext_required = 0
@@ -228,6 +234,19 @@ let g:neomake_markdown_enabled_makers = [] " Disable writegood for now
 " AirLine / FZF Configuration {{{
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - down / up / left / right
+let g:fzf_layout = { 'down': '~40%' }
+
+" In Neovim, you can set up fzf window using a Vim command
+let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '-tabnew' }
+let g:fzf_layout = { 'window': '10split' }
 
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -262,7 +281,11 @@ let g:airline_extensions = ['branch', 'tabline']
 set termguicolors
 set mouse=a
 
-" Terminal Key-mappings {{{
+" Terminal
+" Extensions/Overrides {{{
+
+" }}}
+" Key-mappings {{{
 " Sensible escape sequence within a terminal
 if has('nvim')
   tnoremap <Esc><Esc> <C-\><C-n>
@@ -276,4 +299,66 @@ highlight Visual guibg='White' guifg='NONE'
 highlight Cursor guifg='White' guibg='NONE'
 highlight iCursor guifg='White' guibg='NONE'
 
+autocmd FileType java setlocal omnifunc=eclim#java#complete#CodeComplete
+let g:EclimCompletionMethod = 'omnifunc'
+
+autocmd BufNewFile,BufRead *.slim setlocal filetype=slim
+
+let g:user_emmet_leader_key=","
+
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
+let g:LanguageClient_serverCommands = {
+    \ 'elixir': ['~/.elixir/language-server/language_server.sh'],
+    \ 'java': ['~/.java/language-server/language_server/bin/launcher'],
+    \ 'javascript': ['~/.asdf/installs/nodejs/12.7.0/.npm/bin/javascript-typescript-stdio'],
+    \ 'typescript': ['~/.asdf/installs/nodejs/12.7.0/.npm/bin/javascript-typescript-stdio'],
+    \ 'go': ['gopls', 'serve'],
+    \ 'ruby': ['solargraph', 'stdio'],
+    \ }
+"
+" 'typescript': ['~/.asdf/installs/nodejs/12.7.0/.npm/bin/typescript-language-server', '--stdio'],
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gu :call LanguageClient#textDocument_references()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+let g:LanguageClient_fzfContextMenu = 1
+
+" Play around with some random encryption fun {{{
+
+function Encrypt()
+  if get(b:, 'enc_password', '') == ''
+    let b:enc_password = input('Enter password to encrypt: ')
+
+    call Encrypt()
+    return
+  endif
+
+  redraw!
+
+  execute "%! openssl enc -aes-256-cbc -a -k " . b:enc_password
+endfunction
+
+function Decrypt()
+  if get(b:, 'enc_password', '') == ''
+    let b:enc_password = input('Enter password to decrypt: ')
+
+    call Decrypt()
+    return
+  endif
+
+  redraw!
+
+  execute "%! openssl enc -d -aes-256-cbc -a -k " . b:enc_password
+endfunction
+
+autocmd BufWritePre *.enc :call Encrypt()
+autocmd BufRead,BufWritePost *.enc :call Decrypt()
+
+" }}}
+
 " vim:foldmethod=marker:foldlevel=0
+
