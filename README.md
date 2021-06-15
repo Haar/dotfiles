@@ -13,3 +13,4 @@ mkdir -p .config && cd .config && ln -s ../dotfiles/.config/nvim nvim
 ### Entry points
 
 #####  Neovim: `./config/nvim/init.vim`
+#####  ZSH: `/config/zsh/.zshrc`

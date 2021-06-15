@@ -5,76 +5,97 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-" Plug 'textobj-user'
-" Plug 'textobj-rubyblock'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ryanoasis/vim-devicons'
-Plug 'scrooloose/nerdtree'
-Plug 'godlygeek/tabular'
-Plug 'frankier/neovim-colors-solarized-truecolor-only'
-" Plug 'hail2u/vim-css3-syntax'
-Plug 'JulesWang/css.vim'
-Plug 'othree/html5.vim'
-Plug 'mileszs/ack.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'tomtom/tcomment_vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-bundler'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'ervandew/supertab'
-
-function! BuildYCM(info)
-  if a:info.status == 'installed' || a:info.force
-    " Install YCM with tern completer for Javascript
-    !./install.sh --tern-completer
-  endif
-endfunction
-
-" Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'justinmk/vim-sneak'
-Plug 'tpope/vim-projectionist'
-Plug 'isRuslan/vim-es6'
-Plug 'tpope/vim-speeddating'
-Plug 'mattn/calendar-vim'
-" Plug 'mxw/vim-jsx'
-Plug 'benekastah/neomake'
-
-" Plug 'derekwyatt/vim-scala'
-" Plug 'ensime/ensime-vim'
-
+" Visual Extensions
+" Plug 'frankier/neovim-colors-solarized-truecolor-only'
+Plug 'HaaR/NeoSolarized', { 'branch': 'task/add-floating-window-support' }
 Plug 'colepeters/spacemacs-theme.vim'
 Plug 'joshdick/onedark.vim'
+
+" Functionality Extensions
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+Plug 'justinmk/vim-sneak'
+Plug 'ctrlpvim/ctrlp.vim'
+
+" Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips'
+
+Plug 'mileszs/ack.vim'
+Plug 'scrooloose/nerdtree'
+
+Plug 'godlygeek/tabular'
+" Plug 'zxqfl/tabnine-vim'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'ryanoasis/vim-devicons'
+
+Plug 'tpope/vim-fugitive'
+
+Plug 'airblade/vim-gitgutter'
+
+Plug 'tpope/vim-surround'
+
+" Language specific Extensions
+
 Plug 'elixir-lang/vim-elixir'
 Plug 'udalov/kotlin-vim'
-Plug 'zxqfl/tabnine-vim'
 Plug 'ap/vim-css-color'
 
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+Plug 'isRuslan/vim-es6'
+
+Plug 'vim-ruby/vim-ruby'
+Plug 'JulesWang/css.vim'
+Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
 Plug 'slim-template/vim-slim'
 Plug 'mattn/emmet-vim'
+Plug 'cespare/vim-toml'
+
+Plug 'udalov/kotlin-vim'
 
 Plug 'leafgarland/typescript-vim'
 
-Plug 'cespare/vim-toml'
+" Framework specific Extensions
 
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+" Plug 'tpope/vim-bundler'
+" Plug 'tpope/vim-rails'
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'textobj-user'
+" Plug 'textobj-rubyblock'
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'tpope/vim-projectionist'
+" Plug 'tpope/vim-speeddating'
+" Plug 'mattn/calendar-vim'
+" Plug 'benekastah/neomake'
 
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 
-Plug 'jamessan/vim-gnupg'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 
-Plug 'StanAngeloff/php.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc-tabnine', {'do': 'yarn install --frozen-lockfile'}
+"
+" Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+"
+" Plug 'neoclide/coc-rls', {'do': 'yarn install --frozen-lockfile'}
+"
+" Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
+"
+" Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
+"
+" Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
+
+" Plug 'neovim/nvim-lsp'
 
 call plug#end()

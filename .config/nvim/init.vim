@@ -14,6 +14,8 @@
 " Basics {{{
 syntax enable
 filetype off
+set lazyredraw                  " Improve scrolling performance with cursorline
+set ttyfast                     " More characters will be sent to the screen for redrawing
 " }}}
 " Powerline configuration {{{
 set laststatus=2
@@ -121,36 +123,37 @@ source ~/.config/nvim/plug.vim
 " }}}
 " Set theme (dependent on plugins loaded) {{{
 let g:impact_transbg=1
-colorscheme solarized
+colorscheme NeoSolarized " solarized
 set background=light
 " }}}
 " Configure Alchemist.vim to point at cloned source codes for Elixir and OTP {{{
 let g:alchemist#elixir_erlang_src = "/usr/local/share/src"
-" }}}
-" Tab completion overrides and configuration {{{
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<tab>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<s-tab>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-let g:SuperTabCrMapping = 0
-
-" better key bindings for UltiSnipsExpandTrigger
+" " }}}
+" " Tab completion overrides and configuration {{{
+" "
+" " make YCM compatible with UltiSnips (using supertab)
+" let g:ycm_key_list_select_completion = ['<tab>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<s-tab>', '<Up>']
+" let g:SuperTabDefaultCompletionType = '<C-n>'
+" let g:SuperTabCrMapping = 0
+"
+" " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsJumpForwardTrigger = "<C-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
 let g:UltiSnipsExpandTrigger = "<nop>"
 let g:ulti_expand_or_jump_res = 0
-function ExpandSnippetOrCarriageReturn()
-    let snippet = UltiSnips#ExpandSnippetOrJump()
-    if g:ulti_expand_or_jump_res > 0
-        return snippet
-    else
-        return "\<CR>"
-    endif
-endfunction
-inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
+" function ExpandSnippetOrCarriageReturn()
+"     let snippet = UltiSnips#ExpandSnippetOrJump()
+"     if g:ulti_expand_or_jump_res > 0
+"         return snippet
+"     else
+"         return "\<CR>"
+"     endif
+" endfunction
+" inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 " }}}
 " Tabularize! =] {{{
-map <leader>a :Tabularize /
+vmap <leader><leader> :Tabularize /
 " Automatic tabularizing of tables e.g. | foo | bar |
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
@@ -201,34 +204,35 @@ nnoremap <C-H> <C-W><C-H>
 
 highlight clear SignColumn
 
-" NeoMake {{{ Automatically run linting on file save
-if has('autocmd')
-  autocmd! BufWritePost * Neomake
-endif
-
-let g:neomake_elixir_sky_dogma_maker = {
-    \ 'exe': 'mix',
-    \ 'args': ['lint.dogma', '%:p', '--format=flycheck'],
-    \ 'errorformat': '%E%f:%l:%c: %.: %m'
-    \ }
-
-""" open list without moving the cursor; use :ll to jump to current error
-let g:neomake_open_list = 2
-nnoremap <leader>ne :ll<CR>
-""" verbose behaviour
-let g:neomake_verbose=3
-""" error log file
-let g:neomake_logfile=$HOME.'/.nvim/log/neomake.log'
-
-let g:neomake_autolint_cachedir='~/.nvim/cache'
-let g:neomake_elixir_enabled_makers = ['mix', 'credo', 'sky_dogma']
-let g:neomake_javascript_enabled_makers = ['eslint', 'flow', 'prettier']
-let g:neomake_jsx_enabled_makers = ['eslint', 'prettier']
-let g:neomake_autolint_sign_column_always = 1
-let g:neomake_open_list = 0
-let g:jsx_ext_required = 0
-
-let g:neomake_markdown_enabled_makers = [] " Disable writegood for now
+" Comment out Neomake for now
+""" " NeoMake {{{ Automatically run linting on file save
+""" if has('autocmd')
+"""   autocmd! BufWritePost * Neomake
+""" endif
+"""
+""" let g:neomake_elixir_sky_dogma_maker = {
+"""     \ 'exe': 'mix',
+"""     \ 'args': ['lint.dogma', '%:p', '--format=flycheck'],
+"""     \ 'errorformat': '%E%f:%l:%c: %.: %m'
+"""     \ }
+"""
+""" """ open list without moving the cursor; use :ll to jump to current error
+""" let g:neomake_open_list = 2
+""" nnoremap <leader>ne :ll<CR>
+""" """ verbose behaviour
+""" let g:neomake_verbose=3
+""" """ error log file
+""" let g:neomake_logfile=$HOME.'/.nvim/log/neomake.log'
+"""
+""" let g:neomake_autolint_cachedir='~/.nvim/cache'
+""" let g:neomake_elixir_enabled_makers = ['mix', 'credo', 'sky_dogma']
+""" let g:neomake_javascript_enabled_makers = ['eslint', 'flow', 'prettier']
+""" let g:neomake_jsx_enabled_makers = ['eslint', 'prettier']
+""" let g:neomake_autolint_sign_column_always = 1
+""" let g:neomake_open_list = 0
+""" let g:jsx_ext_required = 0
+"""
+""" let g:neomake_markdown_enabled_makers = [] " Disable writegood for now
 
 " }}}
 " AirLine / FZF Configuration {{{
@@ -248,19 +252,21 @@ let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_layout = { 'window': '10split' }
 
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
+let g:fzf_colors = {
+  \ 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
   \ 'hl':      ['fg', 'Comment'],
   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
   \ 'hl+':     ['fg', 'Statement'],
   \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
   \ 'prompt':  ['fg', 'Conditional'],
   \ 'pointer': ['fg', 'Exception'],
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+  \ 'header':  ['fg', 'Comment']
+  \ }
 
 function! s:fzf_statusline()
   " Override statusline as you like
@@ -294,10 +300,12 @@ endif
 
 set guicursor+=a:blinkon0
 
-highlight Search guibg='White' guifg='NONE'
-highlight Visual guibg='White' guifg='NONE'
-highlight Cursor guifg='White' guibg='NONE'
-highlight iCursor guifg='White' guibg='NONE'
+highlight Search guibg=White guifg=NONE
+highlight Visual guibg=White guifg=NONE
+highlight Cursor guifg=White guibg=NONE
+highlight iCursor guifg=White guibg=NONE
+
+highlight NormalFloat cterm=NONE ctermfg=14 ctermbg=NONE gui=NONE guifg=#000 guibg=NONE
 
 autocmd FileType java setlocal omnifunc=eclim#java#complete#CodeComplete
 let g:EclimCompletionMethod = 'omnifunc'
@@ -309,16 +317,14 @@ let g:user_emmet_leader_key=","
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 
-let g:LanguageClient_serverCommands = {
-    \ 'elixir': ['~/.elixir/language-server/language_server.sh'],
-    \ 'java': ['~/.java/language-server/language_server/bin/launcher'],
-    \ 'javascript': ['~/.asdf/installs/nodejs/12.7.0/.npm/bin/javascript-typescript-stdio'],
-    \ 'typescript': ['~/.asdf/installs/nodejs/12.7.0/.npm/bin/javascript-typescript-stdio'],
-    \ 'go': ['gopls', 'serve'],
-    \ 'ruby': ['solargraph', 'stdio'],
-    \ }
-"
-" 'typescript': ['~/.asdf/installs/nodejs/12.7.0/.npm/bin/typescript-language-server', '--stdio'],
+" let g:LanguageClient_serverCommands = {
+"     \ 'elixir': ['~/.elixir/language-server/language_server.sh'],
+"     \ 'java': ['~/.java/language-server/language_server/bin/launcher'],
+"     \ 'javascript': ['~/.javascript/language-server'],
+"     \ 'typescript': ['~/.javascript/language-server'],
+"     \ 'go': ['gopls', 'serve'],
+"     \ 'ruby': ['solargraph', 'stdio'],
+"     \ }
 
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
@@ -360,5 +366,8 @@ autocmd BufRead,BufWritePost *.enc :call Decrypt()
 
 " }}}
 
+source ~/.config/nvim/coc.vim
+
 " vim:foldmethod=marker:foldlevel=0
 
+let g:tar_cmd="/usr/local/bin/gtar"
