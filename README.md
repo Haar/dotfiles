@@ -7,7 +7,7 @@ Basic usage example:
 ``` sh
 cd ~/ && git clone DOTFILES.git dotfiles
 
-mkdir -p .config && cd .config && ln -s ../dotfiles/.config/nvim nvim
+~/dotfiles/setup.sh
 ```
 
 ### Entry points
