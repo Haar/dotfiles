@@ -46,3 +46,12 @@ cask "raycast"
 cask "slack"
 cask "vscodium"
 cask "xquartz"
+cask "obsidian"
+cask "spotify"
+# cask "karabiner-elements" # (Uncomment if your Mac lacks an escape key)
+# TODO - Verify MAS-based apps (comment out for now)
+brew "mas"
+mas "Flow", id: 1423210932
+mas "Hidden Bar", id: 1452453066
+mas "Things 3", id: 904280696
+mas "Noizio", id: 928871589

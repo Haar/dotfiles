@@ -10,15 +10,8 @@ ln -s ./.config/nvim ~/.config/nvim
 
 echo <<- EOM
 TODO:
-
   Install
-    - Spotify
-    - Hidden Bar
-    - Hemingway
-    - Karabiner-Elements(? If no esc key)
-    - Obsidian
-    - Noizio
     - Wavelink
+      https://www.elgato.com/en/downloads
+      https://help.elgato.com/hc/en-us/articles/360057309711-Installing-Wave-Link-on-Mac-with-Apple-Silicon
 EOM
-
-
