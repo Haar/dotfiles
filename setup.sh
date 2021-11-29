@@ -12,8 +12,6 @@ echo <<- EOM
 TODO:
 
   Install
-    - AppCleaner
-    - Spectacle
     - Spotify
     - Hidden Bar
     - Hemingway
