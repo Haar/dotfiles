@@ -7,3 +7,20 @@ echo "Setting up ZSH"
 echo "Setting up Neovim"
 mkdir -p ~/.config
 ln -s ./.config/nvim ~/.config/nvim
+
+echo <<- EOM
+TODO:
+
+  Install
+    - AppCleaner
+    - Spectacle
+    - Spotify
+    - Hidden Bar
+    - Hemingway
+    - Karabiner-Elements(? If no esc key)
+    - Obsidian
+    - Noizio
+    - Wavelink
+EOM
+
+
