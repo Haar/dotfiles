@@ -5,6 +5,6 @@ mafredri/zsh-async
 
 skywind3000/z.lua kind:path
 
-zdharma/fast-syntax-highlighting
+zdharma-continuum/fast-syntax-highlighting
 
 sindresorhus/pure

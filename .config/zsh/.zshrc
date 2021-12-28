@@ -1,6 +1,6 @@
 # zmodload zsh/zprof
 
-# antibody bundle < ~/.config/antibody/source.txt > ~/.config/antibody/compiled.sh
+antibody bundle < ~/.config/antibody/source.txt > ~/.config/antibody/compiled.sh
 
 source ~/.config/antibody/compiled.sh
 

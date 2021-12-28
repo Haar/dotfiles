@@ -47,8 +47,9 @@ alias :e=vi
 alias :q="echo YOU FAIL"
 alias ..="cd .."
 
-. $HOME/.asdf/asdf.sh
+# . $HOME/.asdf/asdf.sh
 # . $HOME/.asdf/completions/asdf.bash
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 source ~/.kubectl_aliases
 
