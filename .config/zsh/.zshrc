@@ -9,6 +9,7 @@ source <(antibody init)
 autoload -Uz compinit
 
 source ~/.overrides.zsh
+source ~/.private.zsh
 
 # Load and initialize the completion system ignoring insecure directories with a
 # cache time of 20 hours, so it should almost always regenerate the first time a
