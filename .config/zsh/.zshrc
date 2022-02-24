@@ -1,12 +1,13 @@
 # zmodload zsh/zprof
 
-antibody bundle < ~/.config/antibody/source.txt > ~/.config/antibody/compiled.sh
+# antibody bundle < ~/.config/antibody/source.txt > ~/.config/antibody/compiled.sh
+
+autoload -Uz compinit
+compinit
 
 source ~/.config/antibody/compiled.sh
 
-source <(antibody init)
-
-autoload -Uz compinit
+# source <(antibody init)
 
 source ~/.overrides.zsh
 source ~/.private.zsh

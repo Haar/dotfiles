@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
-echo "Installing Homebrew"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+which -s brew
+if [[ $? != 0 ]] ; then
+  # Install Homebrew
+  echo "Installing Homebrew"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+else
+  echo "Updating Homebrew"
+  brew update
+fi
 echo "Installing dependencies via Homebrew"
 /opt/homebrew/bin/brew bundle install ./Brewfile
 echo "Setting up ZSH"
