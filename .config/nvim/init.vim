@@ -370,4 +370,29 @@ source ~/.config/nvim/coc.vim
 
 " vim:foldmethod=marker:foldlevel=0
 
+" Load Debug Adapter Protocol configurations {{{
+luafile ~/.config/nvim/dap.lua
+" }}}
+
+" Configure vim-ultest {{{
+let test#javascript#jest#executable = 'yarn jest'
+let test#javascript#jest#options = "--color=always"
+nnoremap <silent> <leader>rs :UltestSummary<CR>
+nnoremap <silent> <leader>rn :UltestNearest<CR>
+nnoremap <silent> <leader>rf :Ultest<CR>
+nnoremap <silent> <leader>rl :UltestLast<CR>
+nnoremap <silent> <leader>rd :UltestDebug<CR>
+
+let g:ultest_use_pty = 1
+let g:ultest_running_sign="●"
+
+hi UltestPass ctermfg=Green guifg=#859900
+hi UltestFail ctermfg=Red guifg=#dc322f
+hi UltestRunning ctermfg=Yellow guifg=#b58900
+hi UltestBorder ctermfg=Red guifg=#dc322f
+hi UltestSummaryInfo ctermfg=cyan guifg=#2aa198 gui=bold cterm=bold
+" }}}
+
+command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+
 let g:tar_cmd="/usr/local/bin/gtar"

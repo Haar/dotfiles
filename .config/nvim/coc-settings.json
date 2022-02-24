@@ -20,7 +20,12 @@
   },
   "suggest.noselect": false,
   "coc.preferences.formatOnSaveFiletypes": [
-    "rust"
+    "rust",
+    "javascript",
+    "typescript",
+    "golang",
+    "css",
+    "markdown"
   ],
   "rust-client.rlsPath": "rls",
   "rust-client.disableRustup": true,

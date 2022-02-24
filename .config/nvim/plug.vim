@@ -62,7 +62,23 @@ Plug 'udalov/kotlin-vim'
 
 Plug 'leafgarland/typescript-vim'
 
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'Pocco81/DAPInstall.nvim'
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-dap.nvim'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+Plug 'theHamsta/nvim-dap-virtual-text'
+
 " Framework specific Extensions
+
+Plug 'vim-test/vim-test'
+Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
+Plug 'David-Kunz/jester'
 
 " Plug 'tpope/vim-bundler'
 " Plug 'tpope/vim-rails'
