@@ -1,4 +1,6 @@
 {
+  "tsserver.log": "verbose",
+  "tsserver.trace.server": "verbose",
   "languageserver": {
     "elixirLS": {
       "command": "/Users/rwh02/.elixir/language-server/language_server.sh",
@@ -23,17 +25,9 @@
     "rust",
     "javascript",
     "typescript",
+    "typescriptreact",
     "golang",
     "css",
     "markdown"
-  ],
-  "rust-client.rlsPath": "rls",
-  "rust-client.disableRustup": true,
-  "yaml.format.enable":true,
-  "yaml.trace.server":"verbose",
-  "yaml.schemaStore.enable": false,
-  "yaml.schemas": {
-      "kubernetes": "/templates/**/*.{yaml,yml}",
-      "/Users/rwh02/Documents/Code/Golden-Pants/build-a-thing/poypoy/resources/schemas/deployment.json": "*/.rip/deploy.yaml"
-  }
+  ]
 }

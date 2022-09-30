@@ -142,15 +142,15 @@ let g:UltiSnipsJumpForwardTrigger = "<C-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
 let g:UltiSnipsExpandTrigger = "<nop>"
 let g:ulti_expand_or_jump_res = 0
-" function ExpandSnippetOrCarriageReturn()
-"     let snippet = UltiSnips#ExpandSnippetOrJump()
-"     if g:ulti_expand_or_jump_res > 0
-"         return snippet
-"     else
-"         return "\<CR>"
-"     endif
-" endfunction
-" inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
+function ExpandSnippetOrCarriageReturn()
+    let snippet = UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res > 0
+        return snippet
+    else
+        return "\<CR>"
+    endif
+endfunction
+inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 " }}}
 " Tabularize! =] {{{
 vmap <leader><leader> :Tabularize /
@@ -371,12 +371,17 @@ source ~/.config/nvim/coc.vim
 " vim:foldmethod=marker:foldlevel=0
 
 " Load Debug Adapter Protocol configurations {{{
+luafile ~/.config/nvim/telescope.lua
 luafile ~/.config/nvim/dap.lua
+luafile ~/.config/nvim/neotest.lua
 " }}}
 
 " Configure vim-ultest {{{
-let test#javascript#jest#executable = 'yarn jest'
-let test#javascript#jest#options = "--color=always"
+let g:ultest_deprecation_notice = 0
+" let test#javascript#jest#executable = 'yarn jest'
+" let test#javascript#jest#options = "--color=always --runInBand --setupTestFrameworkScriptFile=\"<rootDir>/jest.setupAfterEnv.ts\" --forceExit"
+let test#javascript#jest#options = "--color=always --runInBand --forceExit"
+let g:ultest_env = {'LOG_LEVEL': 'fatal'}
 nnoremap <silent> <leader>rs :UltestSummary<CR>
 nnoremap <silent> <leader>rn :UltestNearest<CR>
 nnoremap <silent> <leader>rf :Ultest<CR>

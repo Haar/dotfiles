@@ -15,7 +15,7 @@ function jj() {
 alias rake='noglob rake'
 
 bindkey -v
-bindkey '^R' history-incremental-search-backward
+# bindkey '^R' history-incremental-search-backward # Replaced by fzf
 bindkey '^[[Z' reverse-menu-complete
 
 setopt PROMPT_SUBST

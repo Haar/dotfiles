@@ -78,6 +78,10 @@ Plug 'theHamsta/nvim-dap-virtual-text'
 
 Plug 'vim-test/vim-test'
 Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'antoinemadec/FixCursorHold.nvim'
+" Plug 'nvim-neotest/neotest'
 Plug 'David-Kunz/jester'
 
 " Plug 'tpope/vim-bundler'
