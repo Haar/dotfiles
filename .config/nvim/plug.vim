@@ -20,6 +20,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 " Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdtree'
@@ -117,5 +118,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
 
 " Plug 'neovim/nvim-lsp'
+Plug 'pantharshit00/vim-prisma'
 
 call plug#end()
