@@ -8,3 +8,5 @@ skywind3000/z.lua kind:path
 zdharma-continuum/fast-syntax-highlighting
 
 sindresorhus/pure
+
+ohmyzsh/ohmyzsh path:plugins/aws
