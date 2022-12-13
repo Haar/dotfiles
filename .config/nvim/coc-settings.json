@@ -2,10 +2,6 @@
   "tsserver.log": "verbose",
   "tsserver.trace.server": "verbose",
   "languageserver": {
-    "elixirLS": {
-      "command": "/Users/rwh02/.elixir/language-server/language_server.sh",
-      "filetypes": ["elixir", "eelixir"]
-    },
     "rust": {
       "command": "rls",
       "filetypes": ["rust"],
