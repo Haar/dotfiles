@@ -379,9 +379,10 @@ luafile ~/.config/nvim/neotest.lua
 " Configure vim-ultest {{{
 let g:ultest_deprecation_notice = 0
 " let test#javascript#jest#executable = 'yarn jest'
+let test#javascript#jest#executable = 'yarn test'
 " let test#javascript#jest#options = "--color=always --runInBand --setupTestFrameworkScriptFile=\"<rootDir>/jest.setupAfterEnv.ts\" --forceExit"
-let test#javascript#jest#options = "--color=always --runInBand --forceExit"
-let g:ultest_env = {'LOG_LEVEL': 'fatal'}
+" let test#javascript#jest#options = "--color=always --runInBand --forceExit"
+let g:ultest_env = {'CI': 'true', 'LOG_LEVEL': 'fatal'}
 nnoremap <silent> <leader>rs :UltestSummary<CR>
 nnoremap <silent> <leader>rn :UltestNearest<CR>
 nnoremap <silent> <leader>rf :Ultest<CR>
